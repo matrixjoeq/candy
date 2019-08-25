@@ -8,7 +8,7 @@ namespace candy {
  * @tparam Ts : types
  */
 template <typename... Ts>
-class Typelist
+struct Typelist
 {
 };
 

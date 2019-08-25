@@ -11,11 +11,10 @@ struct SecondType;
 
 using EmptyTL = Typelist<>;
 using FirstTL = Typelist<FirstType>;
-using SecondTL = Typelist<FirstType, SecondType>;
+using SecondTL = Typelist<SecondType, FirstType>;
 
-static_assert(Size<EmptyTL>::value == 0, "");
-static_assert(Size<FirstTL>::value == 1, "");
-static_assert(Size<SecondTL>::value == 2, "");
+static_assert(std::is_same<PopFront<SecondTL>, FirstTL>::value == true, "");
+static_assert(std::is_same<PopFront<FirstTL>, EmptyTL>::value == true, "");
 
 } // namespace
 } // namespace test
