@@ -5,6 +5,7 @@
 #include "typelist/back.hpp"
 #include "typelist/empty.hpp"
 #include "typelist/erase.hpp"
+#include "typelist/find.hpp"
 #include "typelist/front.hpp"
 #include "typelist/insert.hpp"
 #include "typelist/merge.hpp"
