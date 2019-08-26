@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <type_traits>
+#include "compare.hpp"
 
 namespace candy {
 namespace detail {
