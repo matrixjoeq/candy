@@ -2,6 +2,7 @@
 #pragma once
 
 #include "front.hpp"
+#include "pop_front.hpp"
 #include "push_front.hpp"
 
 namespace candy {

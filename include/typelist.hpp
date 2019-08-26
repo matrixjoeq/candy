@@ -12,6 +12,7 @@
 #include "typelist/push_back.hpp"
 #include "typelist/push_front.hpp"
 #include "typelist/remove.hpp"
+#include "typelist/replace.hpp"
 #include "typelist/reverse.hpp"
 #include "typelist/size.hpp"
 #include "typelist/sort.hpp"
