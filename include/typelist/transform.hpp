@@ -7,7 +7,6 @@
 #include "push_front.hpp"
 
 namespace candy {
-namespace detail {
 
 template <
     typename TL,
@@ -24,9 +23,8 @@ template <
     typename TL,
     template <typename T> class MetaFunc>
 struct TransformT<TL, MetaFunc, false>
+    : PushFrontT<Transform<PopFront<TL>, MetaFunc>, typename MetaFunc<Front<TL>>::Type>
 {
-    using Type = PushFront<Transform<PopFront<TL>, MetaFunc>,
-                           typename MetaFunc<Front<TL>>::Type>;
 };
 
 template <
@@ -34,14 +32,7 @@ template <
     template <typename T> class MetaFunc>
 struct TransformT<TL, MetaFunc, true>
 {
-    using Type = Typelist<>;
+    using Type = TL;
 };
-
-} // namespace detail
-
-template <
-    typename TL,
-    template <typename T> class MetaFunc>
-using Transform = detail::Transform<TL, MetaFunc>;
 
 } // namespace candy

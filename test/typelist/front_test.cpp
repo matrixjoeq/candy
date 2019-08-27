@@ -1,6 +1,6 @@
 
 #include <type_traits>
-#include "typelist.hpp"
+#include "typelist/front.hpp"
 
 namespace candy {
 namespace test {

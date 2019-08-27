@@ -1,41 +1,30 @@
 
 #pragma once
 
+#include "empty.hpp"
 #include "front.hpp"
 #include "pop_front.hpp"
 #include "push_front.hpp"
 #include "remove.hpp"
 
 namespace candy {
-namespace detail {
 
-template <typename TL>
+template <typename TL, bool = Empty<TL>::value>
 struct UniqueT;
 
 template <typename TL>
 using Unique = typename UniqueT<TL>::Type;
 
-template <>
-struct UniqueT<Typelist<>>
+template <typename TL>
+struct UniqueT<TL, true>
 {
-    using Type = Typelist<>;
+    using Type = TL;
 };
-
-template <typename... Ts>
-struct UniqueT<Typelist<Ts...>>
-{
-private:
-    using TL = Typelist<Ts...>;
-    using Tail = PopFront<TL>;
-    using Head = Front<TL>;
-
-public:
-    using Type = PushFront<Remove<Unique<Tail>, Head>, Head>;
-};
-
-} // namespace detail
 
 template <typename TL>
-using Unique = detail::Unique<TL>;
+struct UniqueT<TL, false>
+    : PushFrontT<Remove<Unique<PopFront<TL>>, Front<TL>>, Front<TL>>
+{
+};
 
 } // namespace candy

@@ -1,6 +1,6 @@
 
 #include <type_traits>
-#include "typelist.hpp"
+#include "typelist/remove.hpp"
 
 namespace candy {
 namespace test {
@@ -22,6 +22,7 @@ static_assert(std::is_same<Remove<SecondTL, SecondType>, FirstTL>::value == true
 static_assert(std::is_same<Remove<ThirdTL, FirstType>, SecondTL>::value == true, "");
 
 static_assert(std::is_same<RemoveAll<EmptyTL, FirstType>, EmptyTL>::value == true, "");
+static_assert(std::is_same<RemoveAll<FirstTL, FirstType>, EmptyTL>::value == true, "");
 static_assert(std::is_same<RemoveAll<FirstTL, SecondType>, FirstTL>::value == true, "");
 static_assert(std::is_same<RemoveAll<ThirdTL, FirstType>, FourthTL>::value == true, "");
 

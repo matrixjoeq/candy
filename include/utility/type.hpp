@@ -4,15 +4,6 @@
 #include <stdint.h>
 
 namespace candy {
-namespace detail {
-
-template <typename T>
-struct IdentityT
-{
-    using Type = T;
-};
-
-} // namespace detail
 
 /**
  * @brief Convert integer value to a type
@@ -24,6 +15,12 @@ struct Int2Type
 };
 
 template <typename T>
-using Identity = typename detail::IdentityT<T>::Type;
+struct IdentityT
+{
+    using Type = T;
+};
+
+template <typename T>
+using Identity = typename IdentityT<T>::Type;
 
 } // namespace candy

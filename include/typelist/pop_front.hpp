@@ -4,7 +4,6 @@
 #include "typelist.hpp"
 
 namespace candy {
-namespace detail {
 
 template <typename TL>
 struct PopFrontT;
@@ -15,9 +14,7 @@ struct PopFrontT<Typelist<T, Ts...>>
     using Type = Typelist<Ts...>;
 };
 
-} // namespace detail
-
 template <typename TL>
-using PopFront = typename detail::PopFrontT<TL>::Type;
+using PopFront = typename PopFrontT<TL>::Type;
 
 } // namespace candy

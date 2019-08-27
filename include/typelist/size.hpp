@@ -6,7 +6,6 @@
 #include "pop_front.hpp"
 
 namespace candy {
-namespace detail {
 
 template <typename TL, bool = Empty<TL>::value>
 struct SizeT;
@@ -23,9 +22,7 @@ struct SizeT<TL, true>
     static constexpr size_t value = 0;
 };
 
-} // namespace detail
-
 template <typename TL>
-using Size = detail::SizeT<TL>;
+using Size = SizeT<TL>;
 
 } // namespace candy

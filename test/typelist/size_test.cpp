@@ -1,6 +1,6 @@
 
 #include <type_traits>
-#include "typelist.hpp"
+#include "typelist/size.hpp"
 
 namespace candy {
 namespace test {

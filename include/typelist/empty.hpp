@@ -5,7 +5,6 @@
 #include "typelist.hpp"
 
 namespace candy {
-namespace detail {
 
 template <typename TL>
 struct EmptyT;
@@ -20,9 +19,7 @@ struct EmptyT<Typelist<>> : public std::true_type
 {
 };
 
-} // namespace detail
-
 template <typename TL>
-using Empty = detail::EmptyT<TL>;
+using Empty = EmptyT<TL>;
 
 } // namespace candy

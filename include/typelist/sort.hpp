@@ -9,7 +9,6 @@
 #include "push_front.hpp"
 
 namespace candy {
-namespace detail {
 
 template <
     typename TL,
@@ -47,9 +46,8 @@ template <
     typename TL,
     typename E,
     template <typename T, typename U> class Compare>
-struct InsertSortedT<TL, E, Compare, true>
+struct InsertSortedT<TL, E, Compare, true> : PushFrontT<TL, E>
 {
-    using Type = PushFront<TL, E>;
 };
 
 template <
@@ -67,8 +65,8 @@ template <
     typename TL,
     template <typename T, typename U> class Compare>
 struct InsertionSortT<TL, Compare, false>
+    : InsertSortedT<InsertionSort<PopFront<TL>, Compare>, Front<TL>, Compare>
 {
-    using Type = InsertSorted<InsertionSort<PopFront<TL>, Compare>, Front<TL>, Compare>;
 };
 
 template <
@@ -79,9 +77,7 @@ struct InsertionSortT<TL, Compare, true>
     using Type = TL;
 };
 
-} // namespace detail
-
 template <typename TL, template <typename T, typename U> class Compare>
-using Sort = detail::InsertionSort<TL, Compare>;
+using Sort = InsertionSort<TL, Compare>;
 
 } // namespace candy

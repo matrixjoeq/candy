@@ -7,7 +7,6 @@
 #include "size.hpp"
 
 namespace candy {
-namespace detail {
 
 template <
     typename TL,
@@ -22,9 +21,7 @@ struct InsertT<TL, T, N, true>
     using Type = TL;
 };
 
-} // namespace detail
-
 template <typename TL, typename T, uint32_t N>
-using Insert = typename detail::InsertT<TL, T, N>::Type;
+using Insert = typename InsertT<TL, T, N>::Type;
 
 } // namespace candy

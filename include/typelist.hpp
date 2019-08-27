@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include "typelist/accumulate.hpp"
 #include "typelist/at.hpp"
 #include "typelist/back.hpp"
 #include "typelist/empty.hpp"

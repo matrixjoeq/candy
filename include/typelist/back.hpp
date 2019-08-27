@@ -5,17 +5,13 @@
 #include "reverse.hpp"
 
 namespace candy {
-namespace detail {
 
 template <typename TL>
-struct BackT
+struct BackT : FrontT<Reverse<TL>>
 {
-    using Type = Front<Reverse<TL>>;
 };
 
-} // namespace detail
-
 template <typename TL>
-using Back = typename detail::BackT<TL>::Type;
+using Back = typename BackT<TL>::Type;
 
 } // namespace candy

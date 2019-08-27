@@ -8,7 +8,6 @@
 #include "size.hpp"
 
 namespace candy {
-namespace detail {
 
 template <
     typename TL,
@@ -17,23 +16,16 @@ template <
 struct AtT;
 
 template <typename TL, uint32_t N>
-using At = typename AtT<TL, N>::Type;
-
-template <typename... Ts, uint32_t N>
-struct AtT<Typelist<Ts...>, N, true>
+struct AtT<TL, N, true> : AtT<PopFront<TL>, N - 1>
 {
-    using Type = At<PopFront<Typelist<Ts...>>, N - 1>;
 };
 
-template <typename... Ts>
-struct AtT<Typelist<Ts...>, 0, true>
+template <typename TL>
+struct AtT<TL, 0, true> : FrontT<TL>
 {
-    using Type = Front<Typelist<Ts...>>;
 };
-
-} // namespace detail
 
 template <typename TL, uint32_t N>
-using At = detail::At<TL, N>;
+using At = typename AtT<TL, N>::Type;
 
 } // namespace candy

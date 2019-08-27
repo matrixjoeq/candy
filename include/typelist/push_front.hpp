@@ -4,7 +4,6 @@
 #include "typelist.hpp"
 
 namespace candy {
-namespace detail {
 
 template <typename TL, typename T>
 struct PushFrontT;
@@ -15,9 +14,7 @@ struct PushFrontT<Typelist<Ts...>, T>
     using Type = Typelist<T, Ts...>;
 };
 
-} // namespace detail
-
 template <typename TL, typename T>
-using PushFront = typename detail::PushFrontT<TL, T>::Type;
+using PushFront = typename PushFrontT<TL, T>::Type;
 
 } // namespace candy

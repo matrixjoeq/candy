@@ -1,75 +1,53 @@
 
 #pragma once
 
+#include <type_traits>
+#include "utility/if_then_else.hpp"
+#include "empty.hpp"
 #include "front.hpp"
 #include "pop_front.hpp"
 #include "push_front.hpp"
 
 namespace candy {
-namespace detail {
 
-template <typename TL, typename T, typename U>
+template <typename TL, typename T, typename U, bool = Empty<TL>::value>
 struct ReplaceT;
 
 template <typename TL, typename T, typename U>
 using Replace = typename ReplaceT<TL, T, U>::Type;
 
-template <typename T, typename U>
-struct ReplaceT<Typelist<>, T, U>
+template <typename TL, typename T, typename U>
+struct ReplaceT<TL, T, U, true>
 {
-    using Type = Typelist<>;
-};
-
-template <typename... Ts, typename T, typename U>
-struct ReplaceT<Typelist<T, Ts...>, T, U>
-{
-    using Type = Typelist<U, Ts...>;
-};
-
-template <typename... Ts, typename T, typename U>
-struct ReplaceT<Typelist<Ts...>, T, U>
-{
-private:
-    using TL = Typelist<Ts...>;
-
-public:
-    using Type = PushFront<Replace<PopFront<TL>, T, U>, Front<TL>>;
+    using Type = TL;
 };
 
 template <typename TL, typename T, typename U>
+struct ReplaceT<TL, T, U, false>
+{
+    using Type = IfThenElse<std::is_same<Front<TL>, T>::value,
+                            PushFront<PopFront<TL>, U>,
+                            PushFront<Replace<PopFront<TL>, T, U>, Front<TL>>>;
+};
+
+template <typename TL, typename T, typename U, bool = Empty<TL>::value>
 struct ReplaceAllT;
 
 template <typename TL, typename T, typename U>
 using ReplaceAll = typename ReplaceAllT<TL, T, U>::Type;
 
-template <typename T, typename U>
-struct ReplaceAllT<Typelist<>, T, U>
+template <typename TL, typename T, typename U>
+struct ReplaceAllT<TL, T, U, true>
 {
-    using Type = Typelist<>;
+    using Type = TL;
 };
-
-template <typename... Ts, typename T, typename U>
-struct ReplaceAllT<Typelist<T, Ts...>, T, U>
-{
-    using Type = ReplaceAll<Typelist<U, Ts...>, T, U>;
-};
-
-template <typename... Ts, typename T, typename U>
-struct ReplaceAllT<Typelist<Ts...>, T, U>
-{
-private:
-    using TL = Typelist<Ts...>;
-
-public:
-    using Type = PushFront<ReplaceAll<PopFront<TL>, T, U>, Front<TL>>;
-};
-
-} // namespace detail
 
 template <typename TL, typename T, typename U>
-using Replace = detail::Replace<TL, T, U>;
-
-template <typename TL, typename T, typename U>
-using ReplaceAll = detail::ReplaceAll<TL, T, U>;
+struct ReplaceAllT<TL, T, U, false>
+{
+    using Type = IfThenElse<std::is_same<Front<TL>, T>::value,
+                            ReplaceAll<PushFront<PopFront<TL>, U>, T, U>,
+                            PushFront<ReplaceAll<PopFront<TL>, T, U>, Front<TL>>>;
+};
 
 } // namespace candy
