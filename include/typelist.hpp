@@ -18,4 +18,5 @@
 #include "typelist/reverse.hpp"
 #include "typelist/size.hpp"
 #include "typelist/sort.hpp"
+#include "typelist/transform.hpp"
 #include "typelist/unique.hpp"
