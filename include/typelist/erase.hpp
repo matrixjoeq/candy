@@ -18,13 +18,15 @@ template <typename TL, uint32_t N>
 using Erase = typename EraseT<TL, N>::Type;
 
 template <typename TL, uint32_t N>
-struct EraseT<TL, N, true> : public PushFrontT<Erase<PopFront<TL>, N - 1>, Front<TL>>
+struct EraseT<TL, N, true>
 {
+    using Type = PushFront<Erase<PopFront<TL>, N - 1>, Front<TL>>;
 };
 
 template <typename TL>
-struct EraseT<TL, 0, true> : public PopFrontT<TL>
+struct EraseT<TL, 0, true>
 {
+    using Type = PopFront<TL>;
 };
 
 } // namespace detail
