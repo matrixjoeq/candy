@@ -6,18 +6,18 @@
 namespace candy {
 namespace detail {
 
-template <typename TL, typename Head>
+template <typename TL, typename T>
 struct PushFrontT;
 
-template <typename... Ts, typename Head>
-struct PushFrontT<Typelist<Ts...>, Head>
+template <typename... Ts, typename T>
+struct PushFrontT<Typelist<Ts...>, T>
 {
-    using Type = Typelist<Head, Ts...>;
+    using Type = Typelist<T, Ts...>;
 };
 
 } // namespace detail
 
-template <typename TL, typename Head>
-using PushFront = typename detail::PushFrontT<TL, Head>::Type;
+template <typename TL, typename T>
+using PushFront = typename detail::PushFrontT<TL, T>::Type;
 
 } // namespace candy

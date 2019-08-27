@@ -9,10 +9,10 @@ namespace detail {
 template <typename TL>
 struct FrontT;
 
-template <typename Head, typename... Tail>
-struct FrontT<Typelist<Head, Tail...>>
+template <typename T, typename... Ts>
+struct FrontT<Typelist<T, Ts...>>
 {
-    using Type = Head;
+    using Type = T;
 };
 
 } // namespace detail

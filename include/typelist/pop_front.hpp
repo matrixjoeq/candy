@@ -9,8 +9,8 @@ namespace detail {
 template <typename TL>
 struct PopFrontT;
 
-template <typename Head, typename... Ts>
-struct PopFrontT<Typelist<Head, Ts...>>
+template <typename T, typename... Ts>
+struct PopFrontT<Typelist<T, Ts...>>
 {
     using Type = Typelist<Ts...>;
 };
