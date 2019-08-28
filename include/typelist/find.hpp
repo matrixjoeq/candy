@@ -63,4 +63,35 @@ template <
     template <typename T> class Predicate>
 using FindIf = FindIfT<TL, Predicate>;
 
+template <
+    typename TL,
+    template <typename T> class Predicate,
+    bool = Empty<TL>::value>
+struct FindIfNotT;
+
+template <
+    typename TL,
+    template <typename T> class Predicate>
+struct FindIfNotT<TL, Predicate, true>
+{
+    static constexpr int32_t value = -1;
+};
+
+template <
+    typename TL,
+    template <typename T> class Predicate>
+struct FindIfNotT<TL, Predicate, false>
+{
+private:
+    static constexpr bool temp = Predicate<Front<TL>>::value;
+
+public:
+    static constexpr int32_t value = (temp ? FindIfNotT<PopFront<TL>, Predicate>::value + 1 : 0);
+};
+
+template <
+    typename TL,
+    template <typename T> class Predicate>
+using FindIfNot = FindIfNotT<TL, Predicate>;
+
 } // namespace candy

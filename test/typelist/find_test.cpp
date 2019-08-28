@@ -36,6 +36,9 @@ struct IsBool<bool>
 static_assert(FindIf<EmptyTL, IsBool>::value == -1, "");
 static_assert(FindIf<TL, IsBool>::value == 2, "");
 
+static_assert(FindIfNot<EmptyTL, IsBool>::value == -1, "");
+static_assert(FindIfNot<TL, IsBool>::value == 0, "");
+
 } // namespace
 } // namespace test
 } // namespace candy
