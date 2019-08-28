@@ -7,6 +7,7 @@
 #include "typelist/at.hpp"
 #include "typelist/back.hpp"
 #include "typelist/concat.hpp"
+#include "typelist/count.hpp"
 #include "typelist/empty.hpp"
 #include "typelist/erase.hpp"
 #include "typelist/find.hpp"
