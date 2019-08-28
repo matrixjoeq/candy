@@ -13,6 +13,7 @@
 #include "typelist/front.hpp"
 #include "typelist/insert.hpp"
 #include "typelist/merge.hpp"
+#include "typelist/none_of.hpp"
 #include "typelist/pop_back.hpp"
 #include "typelist/pop_front.hpp"
 #include "typelist/push_back.hpp"
