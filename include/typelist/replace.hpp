@@ -42,6 +42,8 @@ struct ReplaceAllT<TL, T, U, true>
     using Type = TL;
 };
 
+#if 0
+// FIXME : why this doesn't work
 template <typename TL, typename T, typename U>
 struct ReplaceAllT<TL, T, U, false>
 {
@@ -49,5 +51,26 @@ struct ReplaceAllT<TL, T, U, false>
                             ReplaceAll<PushFront<PopFront<TL>, U>, T, U>,
                             PushFront<ReplaceAll<PopFront<TL>, T, U>, Front<TL>>>;
 };
+#else
+template <typename... Ts, typename T, typename U>
+struct ReplaceAllT<Typelist<T, Ts...>, T, U, false>
+{
+private:
+    using TL = Typelist<T, Ts...>;
+
+public:
+    using Type = ReplaceAll<PushFront<PopFront<TL>, U>, T, U>;
+};
+
+template <typename... Ts, typename T, typename U>
+struct ReplaceAllT<Typelist<Ts...>, T, U, false>
+{
+private:
+    using TL = Typelist<Ts...>;
+
+public:
+    using Type = PushFront<ReplaceAll<PopFront<TL>, T, U>, Front<TL>>;
+};
+#endif
 
 } // namespace candy

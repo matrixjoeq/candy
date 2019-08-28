@@ -23,10 +23,11 @@ static_assert(std::is_same<Replace<FirstTL, FirstType, SecondType>, FourthTL>::v
 static_assert(std::is_same<Replace<FirstTL, SecondType, FirstType>, FirstTL>::value == true, "");
 static_assert(std::is_same<Replace<SecondTL, SecondType, FirstType>, FifthTL>::value == true, "");
 static_assert(std::is_same<Replace<ThirdTL, FirstType, SecondType>, SixthTL>::value == true, "");
+static_assert(std::is_same<Replace<SixthTL, FirstType, SecondType>, SeventhTL>::value == true, "");
 
 static_assert(std::is_same<ReplaceAll<EmptyTL, FirstType, SecondType>, EmptyTL>::value == true, "");
-//static_assert(std::is_same<ReplaceAll<FirstTL, FirstType, SecondType>, FourthTL>::value == true, "");
-//static_assert(std::is_same<ReplaceAll<ThirdTL, FirstType, SecondType>, SeventhTL>::value == true, "");
+static_assert(std::is_same<ReplaceAll<FirstTL, FirstType, SecondType>, FourthTL>::value == true, "");
+static_assert(std::is_same<ReplaceAll<ThirdTL, FirstType, SecondType>, SeventhTL>::value == true, "");
 
 } // namespace
 } // namespace test
