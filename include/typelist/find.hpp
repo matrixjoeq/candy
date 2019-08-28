@@ -2,34 +2,29 @@
 #pragma once
 
 #include <stdint.h>
+#include <type_traits>
 #include "empty.hpp"
 #include "front.hpp"
 #include "pop_front.hpp"
 
 namespace candy {
 
-template <typename TL, typename T>
+template <typename TL, typename T, bool = Empty<TL>::value>
 struct FindT;
 
-template <typename... Ts, typename T>
-struct FindT<Typelist<Ts...>, T>
+template <typename TL, typename T>
+struct FindT<TL, T, false>
 {
 private:
-    using TL = Typelist<Ts...>;
-    static constexpr int32_t temp = FindT<PopFront<TL>, T>::value;
+    static constexpr bool temp = std::is_same<Front<TL>, T>::value;
+    static constexpr int32_t value_tail = FindT<PopFront<TL>, T>::value;
 
 public:
-    static constexpr int32_t value = (temp == -1 ? -1 : temp + 1);
+    static constexpr int32_t value = (temp ? 0 : (value_tail == -1 ? -1 : value_tail + 1));
 };
 
-template <typename... Ts, typename T>
-struct FindT<Typelist<T, Ts...>, T>
-{
-    static constexpr int32_t value = 0;
-};
-
-template <typename T>
-struct FindT<Typelist<>, T>
+template <typename TL, typename T>
+struct FindT<TL, T, true>
 {
     static constexpr int32_t value = -1;
 };
