@@ -3,6 +3,7 @@
 
 #include "typelist/accumulate.hpp"
 #include "typelist/all_of.hpp"
+#include "typelist/any_of.hpp"
 #include "typelist/at.hpp"
 #include "typelist/back.hpp"
 #include "typelist/concat.hpp"
