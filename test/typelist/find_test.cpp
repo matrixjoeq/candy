@@ -19,6 +19,23 @@ static_assert(Find<FirstTL, SecondType>::value == -1, "");
 static_assert(Find<SecondTL, FirstType>::value == 0, "");
 static_assert(Find<SecondTL, SecondType>::value == 1, "");
 
+using TL = Typelist<int, char, bool, double>;
+
+template <typename T>
+struct IsBool
+{
+    static constexpr bool value = false;
+};
+
+template <>
+struct IsBool<bool>
+{
+    static constexpr bool value = true;
+};
+
+static_assert(FindIf<EmptyTL, IsBool>::value == -1, "");
+static_assert(FindIf<TL, IsBool>::value == 2, "");
+
 } // namespace
 } // namespace test
 } // namespace candy

@@ -2,6 +2,8 @@
 #pragma once
 
 #include <stdint.h>
+#include "empty.hpp"
+#include "front.hpp"
 #include "pop_front.hpp"
 
 namespace candy {
@@ -34,5 +36,36 @@ struct FindT<Typelist<>, T>
 
 template <typename TL, typename T>
 using Find = FindT<TL, T>;
+
+template <
+    typename TL,
+    template <typename T> class Predicate,
+    bool = Empty<TL>::value>
+struct FindIfT;
+
+template <
+    typename TL,
+    template <typename T> class Predicate>
+struct FindIfT<TL, Predicate, true>
+{
+    static constexpr int32_t value = -1;
+};
+
+template <
+    typename TL,
+    template <typename T> class Predicate>
+struct FindIfT<TL, Predicate, false>
+{
+private:
+    static constexpr bool temp = Predicate<Front<TL>>::value;
+
+public:
+    static constexpr int32_t value = (temp ? 0 : FindIfT<PopFront<TL>, Predicate>::value + 1);
+};
+
+template <
+    typename TL,
+    template <typename T> class Predicate>
+using FindIf = FindIfT<TL, Predicate>;
 
 } // namespace candy
