@@ -7,8 +7,8 @@ namespace candy {
 template <bool B, class T = void>
 using EnableIf = typename std::enable_if<B, T>::type;
 
-template <class F, class... Args>
-using ResultOf = typename std::result_of<F(Args...)>::type;
+template <class T>
+using ResultOf = typename std::result_of<T>::type;
 
 template <class Base, class Derived>
 inline constexpr bool isBaseOf()

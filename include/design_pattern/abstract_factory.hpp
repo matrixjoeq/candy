@@ -26,7 +26,7 @@ class AbstractFactory
 {
 public:
     template <typename T>
-    auto create() -> decltype(ResultOf<std::declval<Unit<T>>().create(Identity<T>())>)
+    auto create() -> ResultOf<decltype(&Unit<T>::create)(Unit<T>, Identity<T>)>
     {
         Unit<T>& self = *this;
         return self.create(Identity<T>());
