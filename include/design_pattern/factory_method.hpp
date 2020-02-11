@@ -3,23 +3,10 @@
 
 #include <functional>
 #include <map>
-#include <memory>
-#include <type_traits>
 #include <utility>
+#include "utility/owner.hpp"
 
 namespace candy {
-
-template <
-    typename T,
-    typename = typename std::enable_if<std::is_pointer<T>::value>::type
->
-using owner_t = T;
-
-template <typename T>
-using OwnerPtr = owner_t<T*>;
-
-template <typename T>
-using UniquePtr = std::unique_ptr<T>;
 
 template <
     typename Product,
